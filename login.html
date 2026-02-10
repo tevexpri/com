@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Secure Access | Tevex Prime Guard Security Vault</title>
-    <meta name="theme-color" content="#0d2b45">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/GlUVXk7XoAA_fbl?format=jpg&name=small">
     <style>
@@ -26,54 +25,47 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
-        html {
+        html, body {
             height: 100%;
             overflow: hidden;
-            -webkit-text-size-adjust: 100%;
         }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #0d1a26 0%, #1a3a5f 100%);
             padding: 2rem;
-            overflow: hidden;
             position: relative;
-            overscroll-behavior: none;
             -webkit-overflow-scrolling: touch;
-            touch-action: manipulation;
         }
 
-        /* Mobile-optimized scroll container */
-        .scroll-container {
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+        /* Mobile scroll container */
+        .mobile-scroll-container {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             padding: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .scroll-container::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
+        /* Hide scrollbar but keep functionality */
+        .mobile-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .mobile-scroll-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         /* Animated background elements */
@@ -143,16 +135,15 @@
         .login-container {
             width: 100%;
             max-width: 480px;
-            min-height: auto;
-            z-index: 100;
+            z-index: 10;
             position: relative;
+            min-height: auto;
             margin: auto;
         }
 
         .login-header {
             text-align: center;
             margin-bottom: 2.5rem;
-            padding: 0 1rem;
         }
 
         .logo-container {
@@ -186,13 +177,13 @@
         }
 
         .logo-icon {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: 2rem;
             color: var(--secondary-color);
             filter: drop-shadow(0 0 10px rgba(192, 151, 76, 0.5));
         }
 
         .logo-text {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-size: 1.5rem;
             font-weight: 700;
             background: linear-gradient(45deg, #fff, var(--secondary-color));
             -webkit-background-clip: text;
@@ -203,22 +194,20 @@
 
         .login-header h1 {
             color: white;
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            line-height: 1.2;
         }
 
         .login-header p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: clamp(1rem, 3vw, 1.1rem);
-            line-height: 1.4;
+            font-size: 1.1rem;
         }
 
         .login-box {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(15px);
-            padding: clamp(1.5rem, 4vw, 2.5rem);
+            padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: 
                 0 20px 50px rgba(0, 0, 0, 0.4),
@@ -227,9 +216,6 @@
             animation: slideUp 0.6s ease-out;
             position: relative;
             overflow: hidden;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transform: translateZ(0);
         }
 
         .login-box::before {
@@ -276,8 +262,6 @@
             border-radius: 8px;
             margin-bottom: 1.5rem;
             border: 1px solid rgba(192, 151, 76, 0.2);
-            flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
         .security-status {
@@ -286,7 +270,6 @@
             gap: 0.5rem;
             color: var(--secondary-color);
             font-weight: 600;
-            font-size: clamp(0.8rem, 3vw, 1rem);
         }
 
         .secure-pulse {
@@ -295,7 +278,6 @@
             background: var(--success-color);
             border-radius: 50%;
             animation: pulse 2s infinite;
-            flex-shrink: 0;
         }
 
         @keyframes pulse {
@@ -305,8 +287,7 @@
 
         .time-display {
             color: rgba(255, 255, 255, 0.7);
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-            flex-shrink: 0;
+            font-size: 0.85rem;
         }
 
         .form-group {
@@ -318,7 +299,7 @@
             margin-bottom: 0.5rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -333,24 +314,20 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--secondary-color);
-            font-size: clamp(1rem, 3vw, 1.1rem);
+            font-size: 1.1rem;
             transition: var(--transition);
-            pointer-events: none;
         }
 
         .input-field {
             width: 100%;
-            padding: clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.25rem) 3.5rem;
+            padding: 1.25rem 1.25rem 1.25rem 3.5rem;
             background: rgba(255, 255, 255, 0.08);
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--border-radius);
             color: white;
-            font-size: clamp(0.95rem, 3vw, 1rem);
+            font-size: 1rem;
             transition: var(--transition);
             backdrop-filter: blur(5px);
-            -webkit-appearance: none;
-            appearance: none;
-            touch-action: manipulation;
         }
 
         .input-field::placeholder {
@@ -369,15 +346,6 @@
             transform: translateY(-50%) scale(1.2);
         }
 
-        /* Fix for mobile autofill */
-        .input-field:-webkit-autofill,
-        .input-field:-webkit-autofill:hover,
-        .input-field:-webkit-autofill:focus {
-            -webkit-text-fill-color: white;
-            -webkit-box-shadow: 0 0 0px 1000px rgba(13, 43, 69, 0.3) inset;
-            transition: background-color 5000s ease-in-out 0s;
-        }
-
         .password-toggle {
             position: absolute;
             right: 1.25rem;
@@ -387,30 +355,23 @@
             border: none;
             color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
-            font-size: clamp(1rem, 3vw, 1.1rem);
+            font-size: 1.1rem;
             transition: var(--transition);
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .password-toggle:hover,
-        .password-toggle:active {
+        .password-toggle:hover {
             color: var(--secondary-color);
             transform: translateY(-50%) scale(1.1);
         }
 
         .btn-login {
             width: 100%;
-            padding: clamp(1rem, 3vw, 1.25rem);
+            padding: 1.25rem;
             background: linear-gradient(135deg, var(--secondary-color) 0%, #d4af37 100%);
             color: white;
             border: none;
             border-radius: var(--border-radius);
-            font-size: clamp(0.95rem, 3vw, 1rem);
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -422,9 +383,6 @@
             gap: 0.75rem;
             position: relative;
             overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            min-height: 52px;
         }
 
         .btn-login::before {
@@ -438,13 +396,12 @@
             transition: left 0.5s;
         }
 
-        .btn-login:active::before {
+        .btn-login:hover::before {
             left: 100%;
         }
 
-        .btn-login:hover,
-        .btn-login:active {
-            transform: translateY(-2px);
+        .btn-login:hover {
+            transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(192, 151, 76, 0.4);
         }
 
@@ -455,7 +412,7 @@
         }
 
         .btn-login i {
-            font-size: clamp(1rem, 3vw, 1.1rem);
+            font-size: 1.1rem;
         }
 
         .login-options {
@@ -465,8 +422,6 @@
             margin-top: 1.5rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .remember-me {
@@ -474,23 +429,19 @@
             align-items: center;
             gap: 0.5rem;
             color: rgba(255, 255, 255, 0.8);
-            font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+            font-size: 0.9rem;
             cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .custom-checkbox {
-            width: clamp(18px, 4vw, 20px);
-            height: clamp(18px, 4vw, 20px);
-            min-width: 18px;
-            min-height: 18px;
+            width: 18px;
+            height: 18px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            flex-shrink: 0;
         }
 
         .custom-checkbox.checked {
@@ -509,11 +460,9 @@
             color: var(--secondary-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+            font-size: 0.9rem;
             transition: var(--transition);
             position: relative;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px 0;
         }
 
         .forgot-password::after {
@@ -527,7 +476,6 @@
             transition: width 0.3s;
         }
 
-        .forgot-password:active::after,
         .forgot-password:hover::after {
             width: 100%;
         }
@@ -538,8 +486,7 @@
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
-            font-size: clamp(0.8rem, 2.5vw, 0.85rem);
-            line-height: 1.4;
+            font-size: 0.85rem;
         }
 
         .login-footer a {
@@ -547,11 +494,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .login-footer a:hover,
-        .login-footer a:active {
+        .login-footer a:hover {
             text-decoration: underline;
         }
 
@@ -565,7 +510,7 @@
             display: none;
             align-items: center;
             gap: 0.75rem;
-            font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+            font-size: 0.9rem;
             backdrop-filter: blur(5px);
         }
 
@@ -593,29 +538,26 @@
             justify-content: center;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            overflow: hidden;
         }
 
         .auth-animation {
             text-align: center;
             color: white;
-            padding: clamp(2rem, 5vw, 3rem);
+            padding: 3rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
             border: 1px solid rgba(192, 151, 76, 0.3);
-            max-width: 90vw;
-            margin: 1rem;
         }
 
         .shield-container {
             position: relative;
-            width: clamp(80px, 20vw, 120px);
-            height: clamp(80px, 20vw, 120px);
-            margin: 0 auto clamp(1.5rem, 4vw, 2rem);
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
         }
 
         .shield {
-            font-size: clamp(80px, 20vw, 120px);
+            font-size: 120px;
             color: var(--secondary-color);
             animation: shieldPulse 2s infinite;
         }
@@ -625,7 +567,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(40px, 10vw, 60px);
+            font-size: 60px;
             color: var(--success-color);
             opacity: 0;
         }
@@ -657,9 +599,9 @@
         }
 
         .progress-ring {
-            width: clamp(80px, 20vw, 120px);
-            height: clamp(80px, 20vw, 120px);
-            margin: clamp(1.5rem, 4vw, 2rem) auto;
+            width: 120px;
+            height: 120px;
+            margin: 2rem auto;
         }
 
         .progress-ring__circle {
@@ -708,104 +650,46 @@
             }
         }
 
-        /* Mobile keyboard handling */
-        .keyboard-open .login-container {
-            align-items: flex-start;
-            padding-top: 1rem;
-        }
-
-        /* Pull-to-refresh prevention */
-        @supports (-webkit-touch-callout: none) {
-            body {
-                height: -webkit-fill-available;
-            }
-        }
-
-        /* Responsive breakpoints */
-        @media (max-width: 480px) {
-            body {
-                padding: 1rem;
-            }
-            
-            .scroll-container {
-                padding: 0.5rem;
+        /* Responsive */
+        @media (max-width: 600px) {
+            .login-box {
+                padding: 2rem;
             }
             
             .login-options {
                 flex-direction: column;
+                gap: 1rem;
                 align-items: flex-start;
             }
             
-            .security-indicator {
-                flex-direction: column;
-                align-items: flex-start;
+            .login-header h1 {
+                font-size: 1.8rem;
             }
             
-            .input-field {
-                font-size: 16px; /* Prevents iOS zoom on focus */
+            .login-header p {
+                font-size: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
             }
         }
 
-        @media (max-height: 700px) {
-            .login-container {
-                margin: 1rem auto;
-            }
-            
-            .login-header {
-                margin-bottom: 1.5rem;
-            }
-            
-            .login-box {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Landscape orientation */
-        @media (max-width: 768px) and (orientation: landscape) {
+        /* Fix for iOS 100vh issue */
+        @supports (-webkit-touch-callout: none) {
             body {
-                padding: 0.5rem;
-            }
-            
-            .scroll-container {
-                padding: 0.5rem;
-            }
-            
-            .login-container {
-                max-width: 90%;
-                margin: 0.5rem auto;
-            }
-            
-            .login-box {
-                padding: 1.5rem;
-            }
-            
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            
-            .btn-login {
-                padding: 0.75rem;
-            }
-        }
-
-        /* Prevent text size adjustment */
-        @media screen and (max-width: 768px) {
-            html {
-                -webkit-text-size-adjust: none;
-            }
-        }
-
-        /* High-resolution displays */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .login-box {
-                border-width: 0.5px;
+                min-height: -webkit-fill-available;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile-optimized scroll container -->
-    <div class="scroll-container" id="scrollContainer">
+    <!-- Mobile Scroll Container -->
+    <div class="mobile-scroll-container">
         <!-- Background Elements -->
         <div class="security-grid"></div>
         <div class="floating-shapes">
@@ -845,7 +729,7 @@
                         <label for="username">Client Identification</label>
                         <div class="input-container">
                             <i class="fas fa-user-secret input-icon"></i>
-                            <input type="text" id="username" class="input-field" placeholder="Enter secure client ID" required inputmode="email">
+                            <input type="text" id="username" class="input-field" placeholder="Enter secure client ID" required>
                         </div>
                     </div>
 
@@ -904,55 +788,7 @@
     </div>
 
     <script>
-        // Mobile optimization fixes
         document.addEventListener('DOMContentLoaded', function() {
-            // Prevent bounce/overscroll on mobile
-            document.body.addEventListener('touchmove', function(e) {
-                if (e.target.classList.contains('scroll-container') || 
-                    e.target.closest('.scroll-container')) {
-                    return; // Allow scrolling in container
-                }
-                e.preventDefault();
-            }, { passive: false });
-
-            // Fix for iOS viewport height
-            function setVH() {
-                let vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }
-            setVH();
-            window.addEventListener('resize', setVH);
-            window.addEventListener('orientationchange', setVH);
-
-            // Keyboard handling
-            const loginForm = document.querySelector('#loginForm');
-            const scrollContainer = document.getElementById('scrollContainer');
-            
-            let isKeyboardOpen = false;
-            
-            // Detect virtual keyboard on mobile
-            const originalHeight = window.innerHeight;
-            window.addEventListener('resize', function() {
-                if (window.innerHeight < originalHeight * 0.8) {
-                    isKeyboardOpen = true;
-                    document.body.classList.add('keyboard-open');
-                    // Scroll input into view
-                    setTimeout(() => {
-                        const activeElement = document.activeElement;
-                        if (activeElement && (activeElement.id === 'username' || activeElement.id === 'password')) {
-                            activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                    }, 300);
-                } else {
-                    isKeyboardOpen = false;
-                    document.body.classList.remove('keyboard-open');
-                    // Reset scroll position
-                    setTimeout(() => {
-                        scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
-                    }, 100);
-                }
-            });
-
             // Initialize time display
             function updateTime() {
                 const now = new Date();
@@ -970,7 +806,7 @@
             // Initialize particles
             function createParticles() {
                 const particles = document.getElementById('particles');
-                for (let i = 0; i < 15; i++) {
+                for (let i = 0; i < 20; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'particle';
                     particle.style.left = `${Math.random() * 100}%`;
@@ -992,31 +828,24 @@
             rememberCheckbox.style.display = 'none';
             rememberLabel.appendChild(rememberCheckbox);
 
-            customCheckbox.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+            customCheckbox.addEventListener('click', () => {
                 rememberCheckbox.checked = !rememberCheckbox.checked;
                 customCheckbox.classList.toggle('checked', rememberCheckbox.checked);
             });
 
-            // Touch-friendly password toggle
+            // Password toggle
             const togglePassword = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('password');
-            
-            togglePassword.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            togglePassword.addEventListener('click', function() {
                 const type = passwordInput.type === 'password' ? 'text' : 'password';
                 passwordInput.type = type;
                 this.innerHTML = type === 'password' 
                     ? '<i class="fas fa-eye"></i>' 
                     : '<i class="fas fa-eye-slash"></i>';
-                
-                // Refocus input for better mobile UX
-                setTimeout(() => passwordInput.focus(), 10);
             });
 
-            // Touch-friendly form submission
+            // Form submission
+            const loginForm = document.getElementById('loginForm');
             const loginBtn = document.getElementById('loginBtn');
             const errorMessage = document.getElementById('errorMessage');
             const authOverlay = document.getElementById('authOverlay');
@@ -1024,7 +853,7 @@
             const checkmark = document.getElementById('checkmark');
             const authMessage = document.getElementById('authMessage');
 
-            // Valid credentials
+            // Valid credentials (obfuscated)
             const validCredentials = [
                 { user: 'patrick.Sterling', pass: 'TevexSecure2002!', name: 'Patrick Sterling' },
                 { user: 'admin', pass: 'Admin@Secure123', name: 'System Administrator' },
@@ -1052,11 +881,6 @@
             loginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Hide keyboard on mobile
-                if (isKeyboardOpen) {
-                    document.activeElement.blur();
-                }
-                
                 const username = document.getElementById('username').value.trim();
                 const password = document.getElementById('password').value.trim();
                 const rememberMe = rememberCheckbox.checked;
@@ -1075,7 +899,7 @@
                 loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
 
                 // Simulate network delay
-                await new Promise(resolve => setTimeout(resolve, 800));
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 // Check credentials
                 const isValid = validCredentials.some(cred => 
@@ -1090,11 +914,11 @@
                     // Simulate multi-stage authentication
                     setTimeout(() => {
                         authMessage.textContent = 'Establishing encrypted tunnel...';
-                        animateProgress(1500);
+                        animateProgress(2000);
                         
                         setTimeout(() => {
                             authMessage.textContent = 'Applying security protocols...';
-                            animateProgress(1200);
+                            animateProgress(1500);
                             
                             setTimeout(() => {
                                 authMessage.textContent = 'Authentication successful!';
@@ -1113,10 +937,10 @@
                                 // Redirect
                                 setTimeout(() => {
                                     window.location.href = 'dashboard.html';
-                                }, 800);
-                            }, 1200);
-                        }, 1500);
-                    }, 800);
+                                }, 1000);
+                            }, 1500);
+                        }, 2000);
+                    }, 1000);
                 } else {
                     // Show error with particles
                     showError('Access denied. Invalid credentials detected.');
@@ -1125,12 +949,6 @@
                     
                     // Create error particles
                     createErrorParticles();
-                    
-                    // Shake form for error feedback
-                    loginForm.style.animation = 'shake 0.5s ease';
-                    setTimeout(() => {
-                        loginForm.style.animation = '';
-                    }, 500);
                 }
             });
 
@@ -1141,12 +959,12 @@
                 // Auto-hide error
                 setTimeout(() => {
                     errorMessage.classList.remove('show');
-                }, 4000);
+                }, 5000);
             }
 
             function createErrorParticles() {
                 const loginBox = document.querySelector('.login-box');
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 15; i++) {
                     const particle = document.createElement('div');
                     particle.style.cssText = `
                         position: absolute;
@@ -1157,7 +975,6 @@
                         left: ${Math.random() * 100}%;
                         top: ${Math.random() * 50}%;
                         animation: particleFloat 1s ease-out;
-                        z-index: 1;
                     `;
                     loginBox.appendChild(particle);
                     
@@ -1165,39 +982,16 @@
                 }
             }
 
-            // Forgot password - mobile optimized
+            // Forgot password
             document.querySelector('.forgot-password').addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
                 showError('Key recovery protocol initiated. Contact security team at protocol-delta@tevexprime.com');
-                
-                // Vibrate on mobile if supported
-                if (navigator.vibrate) {
-                    navigator.vibrate(100);
-                }
             });
 
-            // Auto-focus with mobile considerations
-            setTimeout(() => {
-                const usernameField = document.getElementById('username');
-                usernameField.focus({ preventScroll: true });
-            }, 500);
-
-            // Prevent double-tap zoom on mobile
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(event) {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-
-            // Fix for iOS form zoom
-            document.addEventListener('touchstart', function() {
-                // Do nothing, just prevents zoom
-            }, { passive: true });
+            // Auto-focus
+            document.getElementById('username').focus();
         });
     </script>
 </body>
